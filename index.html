@@ -17,23 +17,45 @@
 <link rel="preconnect" href="https://castoraplay.rf.gd" crossorigin>
 <style>
   * { box-sizing: border-box; }
-  body { background:#0a0a0b; color:#f5c542; font-family:system-ui,sans-serif; text-align:center; padding:70px 20px; margin:0; }
-  h1 { font-size:42px; letter-spacing:4px; margin:0; }
-  .sub { color:#f5c542; font-size:13px; letter-spacing:3px; margin:6px 0 0; }
-  .spin { width:38px; height:38px; margin:30px auto 0; border:3px solid #2a2a2a; border-top-color:#f5c542; border-radius:50%; animation: sp 1s linear infinite; }
-  @keyframes sp { to { transform: rotate(360deg); } }
-  .bar { width:180px; height:4px; margin:26px auto 0; background:#2a2a2a; border-radius:4px; overflow:hidden; }
-  .bar i { display:block; height:100%; width:40%; background:#f5c542; border-radius:4px; animation: load 1.2s ease-in-out infinite alternate; }
-  @keyframes load { from { margin-left:0; } to { margin-left:60%; } }
-  #msg { color:#ccc; font-size:15px; min-height:22px; margin:22px 0 0; }
-  .go { display:inline-block; margin-top:26px; padding:14px 30px; border:2px solid #f5c542; border-radius:12px; font-size:20px; color:#f5c542; text-decoration:none; }
+  body { background:#0a0a0b; color:#f5c542; font-family:system-ui,sans-serif; text-align:center; padding:48px 20px; margin:0; }
+  h1 { font-size:40px; letter-spacing:4px; margin:0;
+    background:linear-gradient(90deg,#f5c542,#fff2b0,#f5c542,#c9920e,#f5c542);
+    background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation: shine 2.4s linear infinite; }
+  @keyframes shine { to { background-position:200% center; } }
+  .tag { color:#f5c542; font-size:12px; letter-spacing:2px; margin:8px 0 0; }
+  .stage { display:flex; align-items:center; justify-content:center; gap:10px; margin:30px auto 0; max-width:340px; }
+  .poster { width:52px; height:76px; border-radius:8px; display:flex; align-items:flex-end; justify-content:center;
+    padding-bottom:6px; font-size:9px; font-weight:700; color:#fff; text-align:center; line-height:1.2;
+    border:1px solid rgba(245,197,66,.45); box-shadow:0 4px 14px rgba(0,0,0,.6); }
+  .p1 { background:linear-gradient(160deg,#7b1e1e,#2b0a0a); }
+  .p2 { background:linear-gradient(160deg,#1e5c7b,#0a2432); }
+  .p3 { background:linear-gradient(160deg,#2e6b34,#0e2b12); }
+  .p4 { background:linear-gradient(160deg,#6b5a1e,#2b230a); }
+  .play { width:64px; height:64px; flex:0 0 64px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#ffe98a,#f5c542 55%,#c9920e);
+    color:#111; font-size:26px; line-height:64px; box-shadow:0 0 0 6px rgba(245,197,66,.18), 0 0 26px rgba(245,197,66,.45);
+    animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.08); } }
+  .bar { width:200px; height:5px; margin:28px auto 0; background:#2a2a2a; border-radius:4px; overflow:hidden; }
+  .bar i { display:block; height:100%; width:0; background:#f5c542; border-radius:4px; }
+  #pct { color:#ccc; font-size:12px; margin:8px 0 0; }
+  #msg { color:#ccc; font-size:15px; min-height:22px; margin:14px 0 0; }
+  .go { display:inline-block; margin-top:24px; padding:14px 30px; border:2px solid #f5c542; border-radius:12px; font-size:20px; color:#f5c542; text-decoration:none; }
+  @media (prefers-reduced-motion: reduce) { h1, .play { animation:none; } }
 </style>
 </head>
 <body>
   <h1>CASTORA</h1>
-  <p class="sub">FREE FAMILY ENTERTAINMENT</p>
-  <div class="spin"></div>
-  <div class="bar"><i></i></div>
+  <p class="tag">REFER &amp; EARN • 7 DAYS PREMIUM FREE</p>
+  <div class="stage">
+    <div class="poster p1">Sembi</div>
+    <div class="poster p2">Gopal Bhar</div>
+    <div class="play">▶</div>
+    <div class="poster p3">CID</div>
+    <div class="poster p4">Chhota Bheem</div>
+  </div>
+  <div class="bar"><i id="fill"></i></div>
+  <p id="pct">0%</p>
   <p id="msg">Castora khulche…</p>
   <p><a class="go" id="go" href="https://castoraplay.rf.gd/castora/invite.php">Castora kholo ▶</a></p>
   <script>
@@ -42,14 +64,18 @@
     var lines = [
       'Castora khulche…',
       'Movies, Shows, Live TV — sob FREE!',
-      'Account banate 1 minute lage, kono taka na.',
-      'Refer koro, 7 din Premium FREE pao!'
+      'Account banate matro 1 minute lage.',
+      'Bondhu join korlei 7 din Premium FREE!'
     ];
     var i = 0;
     setInterval(function(){
       i = (i + 1) % lines.length;
       document.getElementById('msg').textContent = lines[i];
     }, 900);
+    var p = 0, fill = document.getElementById('fill'), pct = document.getElementById('pct');
+    setInterval(function(){
+      if (p < 96) { p += 4; fill.style.width = p + '%'; pct.textContent = p + '%'; }
+    }, 100);
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){ window.location.replace(target); });
     });
