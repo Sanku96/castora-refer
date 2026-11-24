@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Castora — Free Family Entertainment App</title>
 <meta name="description" content="Refer koro, 7 din Premium FREE pao — 5 bondhu join korlei! Movies, Shows, Live TV, Cartoon — sob FREE.">
-<!-- Open Graph: crawlers (WhatsApp, Facebook, Telegram) read THIS page,
-     so the referral card shows in the link preview. No meta refresh here
-     on purpose — crawlers must NOT be sent away from these tags. Humans
-     are redirected by the JS below (crawlers don't run JS). -->
 <meta property="og:title" content="Castora — Free Family Entertainment App">
 <meta property="og:description" content="Refer koro, 7 din Premium FREE pao — 5 bondhu join korlei! Movies, Shows, Live TV, Cartoon — sob FREE.">
 <meta property="og:type" content="website">
@@ -17,22 +13,27 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="600">
 <meta name="twitter:card" content="summary_large_image">
+<script>
+  window.location.replace('https://castoraplay.rf.gd/castora/invite.php' + window.location.search);
+</script>
 <style>
   body { background:#0a0a0b; color:#f5c542; font-family:system-ui,sans-serif; text-align:center; padding:60px 20px; margin:0; }
   a { color:#f5c542; font-size:18px; }
   p { color:#ccc; }
+  .go { display:inline-block; margin-top:18px; padding:14px 26px; border:2px solid #f5c542; border-radius:12px; font-size:20px; text-decoration:none; }
+  .spin { width:34px; height:34px; margin:26px auto 0; border:3px solid #333; border-top-color:#f5c542; border-radius:50%; animation: sp 1s linear infinite; }
+  @keyframes sp { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
   <h1>CASTORA</h1>
   <p>Castora khulche…</p>
-  <p><a id="go" href="https://castoraplay.rf.gd/castora/invite.php">Castora kholo ▶</a></p>
+  <div class="spin"></div>
+  <p><a class="go" id="go" href="https://castoraplay.rf.gd/castora/invite.php">Castora kholo ▶</a></p>
   <script>
-    // Pass the referral code (and any other query) through to the real invite page.
     var target = 'https://castoraplay.rf.gd/castora/invite.php' + window.location.search;
     document.getElementById('go').href = target;
-    window.location.replace(target);
+    setTimeout(function(){ window.location.replace(target); }, 1500);
   </script>
 </body>
 </html>
-
