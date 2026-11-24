@@ -13,26 +13,46 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="600">
 <meta name="twitter:card" content="summary_large_image">
-<script>
-  window.location.replace('https://castoraplay.rf.gd/castora/invite.php' + window.location.search);
-</script>
+<link rel="dns-prefetch" href="//castoraplay.rf.gd">
+<link rel="preconnect" href="https://castoraplay.rf.gd" crossorigin>
 <style>
-  body { background:#0a0a0b; color:#f5c542; font-family:system-ui,sans-serif; text-align:center; padding:60px 20px; margin:0; }
-  a { color:#f5c542; font-size:18px; }
-  p { color:#ccc; }
-  .go { display:inline-block; margin-top:18px; padding:14px 26px; border:2px solid #f5c542; border-radius:12px; font-size:20px; text-decoration:none; }
-  .spin { width:34px; height:34px; margin:26px auto 0; border:3px solid #333; border-top-color:#f5c542; border-radius:50%; animation: sp 1s linear infinite; }
+  * { box-sizing: border-box; }
+  body { background:#0a0a0b; color:#f5c542; font-family:system-ui,sans-serif; text-align:center; padding:70px 20px; margin:0; }
+  h1 { font-size:42px; letter-spacing:4px; margin:0; }
+  .sub { color:#f5c542; font-size:13px; letter-spacing:3px; margin:6px 0 0; }
+  .spin { width:38px; height:38px; margin:30px auto 0; border:3px solid #2a2a2a; border-top-color:#f5c542; border-radius:50%; animation: sp 1s linear infinite; }
   @keyframes sp { to { transform: rotate(360deg); } }
+  .bar { width:180px; height:4px; margin:26px auto 0; background:#2a2a2a; border-radius:4px; overflow:hidden; }
+  .bar i { display:block; height:100%; width:40%; background:#f5c542; border-radius:4px; animation: load 1.2s ease-in-out infinite alternate; }
+  @keyframes load { from { margin-left:0; } to { margin-left:60%; } }
+  #msg { color:#ccc; font-size:15px; min-height:22px; margin:22px 0 0; }
+  .go { display:inline-block; margin-top:26px; padding:14px 30px; border:2px solid #f5c542; border-radius:12px; font-size:20px; color:#f5c542; text-decoration:none; }
 </style>
 </head>
 <body>
   <h1>CASTORA</h1>
-  <p>Castora khulche…</p>
+  <p class="sub">FREE FAMILY ENTERTAINMENT</p>
   <div class="spin"></div>
+  <div class="bar"><i></i></div>
+  <p id="msg">Castora khulche…</p>
   <p><a class="go" id="go" href="https://castoraplay.rf.gd/castora/invite.php">Castora kholo ▶</a></p>
   <script>
     var target = 'https://castoraplay.rf.gd/castora/invite.php' + window.location.search;
     document.getElementById('go').href = target;
+    var lines = [
+      'Castora khulche…',
+      'Movies, Shows, Live TV — sob FREE!',
+      'Account banate 1 minute lage, kono taka na.',
+      'Refer koro, 7 din Premium FREE pao!'
+    ];
+    var i = 0;
+    setInterval(function(){
+      i = (i + 1) % lines.length;
+      document.getElementById('msg').textContent = lines[i];
+    }, 900);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ window.location.replace(target); });
+    });
     setTimeout(function(){ window.location.replace(target); }, 1500);
   </script>
 </body>
